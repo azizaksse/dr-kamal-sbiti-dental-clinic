@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --background-secondary: #121212;
+  --background-tertiary: #1e1e1e;
+  --accent-gold: #FFD700;
+  --accent-gold-bright: #FFF700;
+  --accent-gold-dark: #B8860B;
+  --accent-burgundy: #722F37;
+  --accent-burgundy-dark: #5D1A1D;
+  --accent-silver: #E5E4E2;
+  --accent-smoke: #36454F;
+  --accent-steel: #71797E;
+  --text-muted: #B8B8B8;
+  --text-smoke: #8C8C8C;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 215, 0, 0.15);
+  --shadow-gold: rgba(255, 215, 0, 0.3);
+  --shadow-dark: rgba(0, 0, 0, 0.9);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-accent-gold: var(--accent-gold);
+  --color-accent-gold-bright: var(--accent-gold-bright);
+  --color-accent-gold-dark: var(--accent-gold-dark);
+  --color-accent-burgundy: var(--accent-burgundy);
+  --color-accent-burgundy-dark: var(--accent-burgundy-dark);
+  --color-accent-silver: var(--accent-silver);
+  --color-accent-smoke: var(--accent-smoke);
+  --color-accent-steel: var(--accent-steel);
+  --color-text-muted: var(--text-muted);
+  --color-text-smoke: var(--text-smoke);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-shadow-gold: var(--shadow-gold);
+  --color-shadow-dark: var(--shadow-dark);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-playfair);
+  --font-cormorant: var(--font-cormorant);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(114, 47, 55, 0.03) 0%, transparent 40%),
+    linear-gradient(135deg, rgba(54, 69, 79, 0.02) 0%, transparent 50%);
+}
+
+.lux-heading {
+  font-family: var(--font-cormorant), var(--font-playfair), serif;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mafia-heading {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 4px 8px rgba(255, 215, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.glass-morphism {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+.premium-shadow {
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.6),
+    0 8px 32px rgba(255, 215, 0, 0.15),
+    0 16px 64px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 215, 0, 0.1);
+}
+
+.film-grain::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.04;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0);
+  background-size: 15px 15px;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0) }
+  10% { transform: translate(-5%, -10%) }
+  20% { transform: translate(-15%, 5%) }
+  30% { transform: translate(7%, -25%) }
+  40% { transform: translate(-5%, 25%) }
+  50% { transform: translate(-15%, 10%) }
+  60% { transform: translate(15%, 0%) }
+  70% { transform: translate(0%, 15%) }
+  80% { transform: translate(3%, -10%) }
+  90% { transform: translate(-10%, 5%) }
+}
+
+.mafia-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.mafia-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--accent-gold), 
+    var(--accent-burgundy), 
+    var(--accent-smoke), 
+    var(--accent-gold));
+  background-size: 200% 200%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: golden-border 3s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+@keyframes golden-border {
+  0%, 100% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+}
+
+.luxury-card {
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.05) 0%, 
+    rgba(18, 18, 18, 0.9) 25%, 
+    rgba(30, 30, 30, 0.95) 75%, 
+    rgba(255, 215, 0, 0.03) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.7),
+    0 16px 64px rgba(255, 215, 0, 0.1),
+    inset 0 1px 0 rgba(255, 215, 0, 0.15);
+}
+
+.smoke-text {
+  color: var(--text-smoke);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.golden-accent {
+  color: var(--accent-gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.steel-accent {
+  color: var(--accent-steel);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
