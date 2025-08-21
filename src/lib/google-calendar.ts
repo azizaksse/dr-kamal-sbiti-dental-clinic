@@ -26,28 +26,44 @@ const ALGERIA_TIMEZONE = 'Africa/Algiers';
 function getCalendarClient() {
   const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n');
   
+  console.log('Initializing Google Calendar client...');
+  console.log('Environment check:', {
+    hasPrivateKey: !!privateKey,
+    hasClientEmail: !!process.env.GOOGLE_CLIENT_EMAIL,
+    hasProjectId: !!process.env.GOOGLE_PROJECT_ID,
+    hasCalendarId: !!process.env.GOOGLE_CALENDAR_ID,
+  });
+  
   if (!privateKey || !process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PROJECT_ID) {
     throw new Error('Missing Google Calendar credentials');
   }
 
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: privateKey,
-      project_id: process.env.GOOGLE_PROJECT_ID,
-    },
-    scopes: [
-      'https://www.googleapis.com/auth/calendar',
-      'https://www.googleapis.com/auth/calendar.events',
-    ],
-  });
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: privateKey,
+        project_id: process.env.GOOGLE_PROJECT_ID,
+      },
+      scopes: [
+        'https://www.googleapis.com/auth/calendar',
+        'https://www.googleapis.com/auth/calendar.events',
+      ],
+    });
 
-  return google.calendar({ version: 'v3', auth });
+    console.log('Google Calendar client initialized successfully');
+    return google.calendar({ version: 'v3', auth });
+  } catch (error) {
+    console.error('Error initializing Google Calendar client:', error);
+    throw new Error('Failed to initialize Google Calendar client');
+  }
 }
 
 // Check calendar availability for a specific date
 export async function checkAvailability(date: string): Promise<TimeSlot[]> {
   try {
+    console.log('Checking availability for date:', date);
+    
     const calendar = getCalendarClient();
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
     
@@ -62,16 +78,32 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
       slotDuration: 1, // 1 hour slots
     };
 
-    // Parse the date in Algeria timezone
-    const selectedDate = new Date(date + 'T00:00:00');
+    // Parse the date more safely
+    console.log('Original date string:', date);
+    
+    // Validate date format
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      throw new Error(`Invalid date format: ${date}. Expected YYYY-MM-DD`);
+    }
+    
+    // Parse the date in Algeria timezone - use a more explicit approach
+    const [year, month, day] = date.split('-').map(Number);
+    const selectedDate = new Date(year, month - 1, day); // month is 0-indexed
+    
+    console.log('Parsed selectedDate:', selectedDate);
     
     // Get start and end of day in Algeria timezone, then convert to UTC
     const algeriaStartOfDay = startOfDay(selectedDate);
     const algeriaEndOfDay = endOfDay(selectedDate);
     
+    console.log('Algeria start/end of day:', { algeriaStartOfDay, algeriaEndOfDay });
+    
     const utcStartTime = fromZonedTime(algeriaStartOfDay, ALGERIA_TIMEZONE);
     const utcEndTime = fromZonedTime(algeriaEndOfDay, ALGERIA_TIMEZONE);
+    
+    console.log('UTC start/end times:', { utcStartTime, utcEndTime });
 
+    console.log('Making Google Calendar API call...');
     const response = await calendar.events.list({
       calendarId,
       timeMin: utcStartTime.toISOString(),
@@ -80,44 +112,70 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
       orderBy: 'startTime',
     });
 
+    console.log('Google Calendar API response received');
     const existingEvents = response.data.items || [];
+    console.log('Existing events count:', existingEvents.length);
     
     // Generate time slots for the day in Algeria timezone
     const timeSlots: TimeSlot[] = [];
     
     for (let hour = businessHours.start; hour < businessHours.end; hour += businessHours.slotDuration) {
-      // Create slot times in Algeria timezone
-      const algeriaSlotStart = new Date(date + `T${hour.toString().padStart(2, '0')}:00:00`);
-      const algeriaSlotEnd = new Date(date + `T${(hour + businessHours.slotDuration).toString().padStart(2, '0')}:00:00`);
-      
-      // Convert to UTC for comparison with Google Calendar events
-      const utcSlotStart = fromZonedTime(algeriaSlotStart, ALGERIA_TIMEZONE);
-      const utcSlotEnd = fromZonedTime(algeriaSlotEnd, ALGERIA_TIMEZONE);
-      
-      // Check if this slot conflicts with existing events
-      const isAvailable = !existingEvents.some(event => {
-        if (!event.start?.dateTime || !event.end?.dateTime) return false;
+      try {
+        // Create slot times more safely using Date constructor
+        const algeriaSlotStart = new Date(year, month - 1, day, hour, 0, 0, 0);
+        const algeriaSlotEnd = new Date(year, month - 1, day, hour + businessHours.slotDuration, 0, 0, 0);
         
-        const eventStart = new Date(event.start.dateTime);
-        const eventEnd = new Date(event.end.dateTime);
+        console.log(`Creating slot for hour ${hour}:`, { algeriaSlotStart, algeriaSlotEnd });
         
-        return (
-          (utcSlotStart >= eventStart && utcSlotStart < eventEnd) ||
-          (utcSlotEnd > eventStart && utcSlotEnd <= eventEnd) ||
-          (utcSlotStart <= eventStart && utcSlotEnd >= eventEnd)
-        );
-      });
+        // Convert to UTC for comparison with Google Calendar events
+        const utcSlotStart = fromZonedTime(algeriaSlotStart, ALGERIA_TIMEZONE);
+        const utcSlotEnd = fromZonedTime(algeriaSlotEnd, ALGERIA_TIMEZONE);
+        
+        console.log(`UTC slot times for hour ${hour}:`, { utcSlotStart, utcSlotEnd });
       
-      timeSlots.push({
-        start: utcSlotStart.toISOString(),
-        end: utcSlotEnd.toISOString(),
-        available: isAvailable,
-      });
+        // Check if this slot conflicts with existing events
+        const isAvailable = !existingEvents.some(event => {
+          if (!event.start?.dateTime || !event.end?.dateTime) return false;
+          
+          const eventStart = new Date(event.start.dateTime);
+          const eventEnd = new Date(event.end.dateTime);
+          
+          return (
+            (utcSlotStart >= eventStart && utcSlotStart < eventEnd) ||
+            (utcSlotEnd > eventStart && utcSlotEnd <= eventEnd) ||
+            (utcSlotStart <= eventStart && utcSlotEnd >= eventEnd)
+          );
+        });
+        
+        timeSlots.push({
+          start: utcSlotStart.toISOString(),
+          end: utcSlotEnd.toISOString(),
+          available: isAvailable,
+        });
+        
+        console.log(`Slot ${hour}:00 - available: ${isAvailable}`);
+        
+      } catch (slotError) {
+        console.error(`Error creating slot for hour ${hour}:`, slotError);
+        // Continue with next slot instead of failing completely
+        continue;
+      }
     }
     
+    console.log('Total slots generated:', timeSlots.length);
     return timeSlots;
+    
   } catch (error) {
     console.error('Error checking calendar availability:', error);
+    
+    // Check if it's a Google API error
+    if (error && typeof error === 'object' && 'code' in error) {
+      console.error('Google API error code:', error.code);
+      if ('message' in error) {
+        console.error('Google API error message:', error.message);
+      }
+    }
+    
     throw new Error('Failed to check calendar availability');
   }
 }

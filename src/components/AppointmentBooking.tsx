@@ -83,24 +83,48 @@ export default function AppointmentBooking({ className }: AppointmentBookingProp
   // Check availability when date changes
   useEffect(() => {
     if (watchedDate && watchedDate !== selectedDate) {
+      // Reset any previous error status when checking new date
+      if (bookingStatus === "error") {
+        setBookingStatus("idle");
+        setStatusMessage("");
+      }
+      
       checkAvailability(watchedDate);
       setSelectedDate(watchedDate);
     }
-  }, [watchedDate, selectedDate]);
+  }, [watchedDate, selectedDate, bookingStatus]);
 
   const checkAvailability = async (date: string) => {
+    if (!date || typeof date !== 'string') {
+      console.error("Invalid date provided to checkAvailability:", date);
+      return;
+    }
+
     setCheckingAvailability(true);
     try {
-      const response = await fetch(`/api/appointments/availability?date=${date}`);
+      console.log("Checking availability for date:", date);
+      const response = await fetch(`/api/appointments/availability?date=${encodeURIComponent(date)}`);
+      
       if (!response.ok) {
-        throw new Error("Failed to check availability");
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(errorData.error || "Failed to check availability");
       }
       
       const slots: TimeSlot[] = await response.json();
+      console.log("Received slots:", slots);
+      
+      if (!Array.isArray(slots)) {
+        throw new Error("Invalid response format from server");
+      }
+      
       setAvailableSlots(slots);
     } catch (error) {
       console.error("Error checking availability:", error);
       setAvailableSlots([]);
+      
+      // Show user-friendly error message
+      setBookingStatus("error");
+      setStatusMessage(error instanceof Error ? `Erreur lors de la vérification de disponibilité: ${error.message}` : "Impossible de vérifier la disponibilité");
     } finally {
       setCheckingAvailability(false);
     }
@@ -141,9 +165,25 @@ export default function AppointmentBooking({ className }: AppointmentBookingProp
   };
 
   const formatTimeSlot = (slot: TimeSlot) => {
-    const startTime = new Date(slot.start);
-    const endTime = new Date(slot.end);
-    return `${format(startTime, "h:mm a")} - ${format(endTime, "h:mm a")}`;
+    try {
+      if (!slot || !slot.start || !slot.end) {
+        console.error("Invalid slot data:", slot);
+        return "Invalid time";
+      }
+      
+      const startTime = new Date(slot.start);
+      const endTime = new Date(slot.end);
+      
+      if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+        console.error("Invalid date in slot:", slot);
+        return "Invalid time";
+      }
+      
+      return `${format(startTime, "h:mm a")} - ${format(endTime, "h:mm a")}`;
+    } catch (error) {
+      console.error("Error formatting time slot:", error, slot);
+      return "Invalid time";
+    }
   };
 
   return (
@@ -302,16 +342,30 @@ export default function AppointmentBooking({ className }: AppointmentBookingProp
                     {selectedDate ? "Select a time" : "Select a date first"}
                   </option>
                   {availableSlots
-                    .filter((slot) => slot.available)
-                    .map((slot) => (
-                      <option
-                        key={slot.start}
-                        value={format(new Date(slot.start), "HH:mm")}
-                        className="bg-background-tertiary text-white"
-                      >
-                        {formatTimeSlot(slot)}
-                      </option>
-                    ))}
+                    .filter((slot) => slot && slot.available === true)
+                    .map((slot) => {
+                      try {
+                        const startDate = new Date(slot.start);
+                        if (isNaN(startDate.getTime())) {
+                          console.error("Invalid start date in slot:", slot);
+                          return null;
+                        }
+                        
+                        return (
+                          <option
+                            key={slot.start}
+                            value={format(startDate, "HH:mm")}
+                            className="bg-background-tertiary text-white"
+                          >
+                            {formatTimeSlot(slot)}
+                          </option>
+                        );
+                      } catch (error) {
+                        console.error("Error rendering slot option:", error, slot);
+                        return null;
+                      }
+                    })
+                    .filter(Boolean)}
                 </select>
               )}
               {errors.time && (

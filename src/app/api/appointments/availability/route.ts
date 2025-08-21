@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkAvailability } from '@/lib/google-calendar';
 
 export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const date = searchParams.get('date');
+  
   try {
-    const { searchParams } = new URL(request.url);
-    const date = searchParams.get('date');
 
     if (!date) {
       return NextResponse.json(
@@ -46,6 +47,11 @@ export async function GET(request: NextRequest) {
 
   } catch (error) {
     console.error('Error checking availability:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      requestedDate: date,
+    });
     
     // Handle specific error types
     if (error instanceof Error) {
@@ -62,10 +68,20 @@ export async function GET(request: NextRequest) {
           { status: 503 }
         );
       }
+
+      if (error.message.includes('Failed to check calendar availability')) {
+        return NextResponse.json(
+          { error: 'Calendar service temporarily unavailable' },
+          { status: 503 }
+        );
+      }
     }
 
     return NextResponse.json(
-      { error: 'Failed to check availability. Please try again later.' },
+      { 
+        error: 'Failed to check availability. Please try again later.',
+        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
+      },
       { status: 500 }
     );
   }
