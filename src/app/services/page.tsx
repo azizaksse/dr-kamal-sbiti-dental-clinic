@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Services - Excellence Sur Mesure",
+  title: "Nos Services - Soins Dentaires Complets",
 };
 
 type Service = {
@@ -13,36 +13,36 @@ type Service = {
 
 const services: Service[] = [
   {
-    title: "TRANSFERTS AÉROPORT",
-    subtitle: "La Première Impression Compte",
-    description: "De l&apos;élégance de Nice à la sophistication de Monaco, nous orchestrons vos arrivées et départs avec une précision horlogère.",
-    features: ["Suivi de vol en temps réel", "Accueil personnalisé avec panneau", "Assistance bagages incluse", "Véhicules premium climatisés"],
-    premium: false,
-    price: "À partir de 80€",
-  },
-  {
-    title: "MISE À DISPOSITION",
-    subtitle: "Votre Temps, Notre Expertise",
-    description: "Un chauffeur dévoué à votre service, prêt à s&apos;adapter à vos besoins les plus exigeants avec une discrétion absolue.",
-    features: ["Flexibilité totale d&apos;horaires", "Temps d&apos;attente inclus", "Itinéraires personnalisés", "Chauffeur polyglotte"],
+    title: "ORTHODONTIE MODERNE",
+    subtitle: "Alignement Parfait de Votre Sourire",
+    description: "Correction de l&apos;alignement dentaire avec les techniques les plus avancées: aligneurs invisibles, système céramique et Pitts 21 pour des résultats esthétiques optimaux.",
+    features: ["Aligneurs invisibles Invisalign", "Brackets céramiques transparents", "Système Pitts 21 à faible friction", "Suivi numérique 3D"],
     premium: true,
-    price: "150€/heure",
+    price: "À partir de 120,000 DA",
   },
   {
-    title: "ÉVÉNEMENTS PRESTIGE",
-    subtitle: "L&apos;Art de l&apos;Exception",
-    description: "Mariages royaux, MIPIM, Cannes Lions, Grand Prix de Monaco - nous élevons chaque événement au rang de légende.",
-    features: ["Coordination événementielle", "Flotte berline & van luxe", "Chauffeurs en livrée", "Service multi-véhicules"],
+    title: "IMPLANTOLOGIE",
+    subtitle: "Remplacement Dentaire Permanent",
+    description: "Solutions d&apos;implants dentaires de dernière génération pour remplacer vos dents manquantes avec des matériaux biocompatibles et une chirurgie guidée par ordinateur.",
+    features: ["Implants en titanium Grade 4", "Chirurgie guidée 3D", "Prothèses sur mesure", "Cicatrisation rapide"],
+    premium: true,
+    price: "80,000 DA par implant",
+  },
+  {
+    title: "ESTHÉTIQUE DENTAIRE",
+    subtitle: "Sourire de Rêve Garanti",
+    description: "Transformez votre sourire avec nos traitements esthétiques: facettes céramiques, blanchiment laser professionnel et design du sourire personnalisé.",
+    features: ["Facettes céramiques E-max", "Blanchiment laser Zoom", "Design du sourire numérique", "Résultats immédiats"],
     premium: true,
     price: "Sur devis",
   },
   {
-    title: "TOURS & EXCURSIONS",
-    subtitle: "Révélateur de Merveilles",
-    description: "De Monaco à Milan, de Saint-Tropez à San Remo, découvrez la Riviera à travers le regard d&apos;un connaisseur.",
-    features: ["Itinéraires secrets exclusifs", "Arrêts photographiques premium", "Recommandations d&apos;initiés", "Guide culturel inclus"],
+    title: "SOINS GÉNÉRAUX",
+    subtitle: "Prévention et Traitement",
+    description: "Soins dentaires complets pour toute la famille: détartrage, soins des caries, traitements de canal et prévention bucco-dentaire.",
+    features: ["Détartrage ultrasonique", "Soins conservateurs", "Endodontie moderne", "Prévention personnalisée"],
     premium: false,
-    price: "280€/demi-journée",
+    price: "À partir de 2,500 DA",
   },
 ];
 
@@ -50,11 +50,11 @@ import Container from "@/components/Container";
 import Section from "@/components/Section";
 import Button from "@/components/ui/Button";
 import Reveal from "@/components/Reveal";
-import { Car, Clock, Crown, MapPin, Star, Shield, CheckCircle, ArrowRight } from "lucide-react";
+import { Activity, Clock, Crown, Heart, Star, Shield, CheckCircle, ArrowRight } from "lucide-react";
 import type { ReactElement } from "react";
 
 const getServiceIcon = (idx: number) => {
-  const icons = [Car, Clock, Crown, MapPin];
+  const icons = [Activity, Heart, Crown, Shield];
   return icons[idx];
 };
 
@@ -72,7 +72,7 @@ export default function ServicesPage(): ReactElement {
             <Reveal>
               <div className="mb-8">
                 <span className="luxury-card mafia-glow px-6 py-3 text-accent-gold text-sm font-semibold tracking-widest uppercase">
-                  Excellence Sur Mesure
+                  Soins Dentaires Complets
                 </span>
               </div>
             </Reveal>
@@ -80,14 +80,14 @@ export default function ServicesPage(): ReactElement {
             <Reveal delay={200}>
               <h1 className="mafia-heading text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.9] mb-8">
                 <span className="block">NOS</span>
-                <span className="block golden-accent">SERVICES</span>
+                <span className="block golden-accent">SOINS</span>
               </h1>
             </Reveal>
             
             <Reveal delay={400}>
               <p className="text-2xl sm:text-3xl text-white/90 max-w-4xl mx-auto leading-relaxed font-light">
-                Quatre domaines d&apos;excellence où chaque détail compte.
-                <span className="golden-accent font-medium block mt-2"> Où l&apos;art du service rencontre la perfection.</span>
+                Quatre spécialités dentaires où l&apos;excellence médicale rencontre l&apos;innovation.
+                <span className="golden-accent font-medium block mt-2">Votre sourire, notre passion.</span>
               </p>
             </Reveal>
           </div>
@@ -194,18 +194,18 @@ export default function ServicesPage(): ReactElement {
             {[
               {
                 icon: Shield,
-                title: "DISCRÉTION ABSOLUE",
-                description: "Vos trajets, vos conversations, vos secrets restent entre nous. Parole d'honneur."
+                title: "TECHNOLOGIE AVANCÉE",
+                description: "Equipements de dernière génération et techniques mini-invasives pour votre confort."
               },
               {
                 icon: Clock,
-                title: "PONCTUALITÉ SUISSE",
-                description: "Nous arrivons toujours 5 minutes avant l'heure convenue. Sans exception."
+                title: "PRISE EN CHARGE RAPIDE",
+                description: "Rendez-vous dans les meilleurs délais et urgences dentaires 24h/24."
               },
               {
                 icon: Crown,
-                title: "EXCELLENCE TOTALE",
-                description: "Véhicules immaculés, chauffeurs irréprochables, service sans faille."
+                title: "EXPERTISE RECONNUE",
+                description: "Spécialistes diplômés et formés aux dernières innovations dentaires."
               }
             ].map((guarantee, idx) => (
               <Reveal key={guarantee.title} delay={idx * 200}>
@@ -234,12 +234,12 @@ export default function ServicesPage(): ReactElement {
           <Reveal>
             <div className="text-center max-w-4xl mx-auto">
               <h2 className="mafia-heading text-5xl lg:text-6xl text-white mb-8">
-                Prêt pour 
-                <span className="golden-accent block">L&apos;Excellence ?</span>
+                Prêt pour votre
+                <span className="golden-accent block">Nouveau Sourire ?</span>
               </h2>
               <p className="text-xl text-white/85 mb-12 max-w-2xl mx-auto">
-                Rejoignez notre cercle exclusif de clients privilégiés et découvrez 
-                ce que signifie vraiment voyager avec style.
+                Rejoignez nos milliers de patients satisfaits et découvrez 
+                ce que signifie vraiment avoir un sourire parfait.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button 
@@ -250,7 +250,7 @@ export default function ServicesPage(): ReactElement {
                 >
                   <a href="/contact" className="flex items-center gap-3">
                     <Crown className="w-5 h-5" />
-                    RÉSERVER MAINTENANT
+                    PRENDRE RENDEZ-VOUS
                   </a>
                 </Button>
                 <Button 

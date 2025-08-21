@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv:*)",
+      "Bash(npm run build:*)",
+      "mcp__serena__get_symbols_overview"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

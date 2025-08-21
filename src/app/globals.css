@@ -1,24 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
-  --background-secondary: #121212;
-  --background-tertiary: #1e1e1e;
-  --accent-gold: #FFD700;
-  --accent-gold-bright: #FFF700;
-  --accent-gold-dark: #B8860B;
-  --accent-burgundy: #722F37;
-  --accent-burgundy-dark: #5D1A1D;
-  --accent-silver: #E5E4E2;
-  --accent-smoke: #36454F;
-  --accent-steel: #71797E;
-  --text-muted: #B8B8B8;
-  --text-smoke: #8C8C8C;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 215, 0, 0.15);
-  --shadow-gold: rgba(255, 215, 0, 0.3);
-  --shadow-dark: rgba(0, 0, 0, 0.9);
+  --background: #ffffff;
+  --foreground: #1a1a1a;
+  --background-secondary: #f8f9fa;
+  --background-tertiary: #e9ecef;
+  --accent-primary: #2c5aa0;
+  --accent-primary-light: #4a7bc8;
+  --accent-primary-dark: #1a3d7a;
+  --accent-secondary: #00b4d8;
+  --accent-secondary-dark: #0077b6;
+  --accent-success: #198754;
+  --accent-text: #333333;
+  --accent-text-light: #6c757d;
+  --accent-border: #dee2e6;
+  --text-muted: #6c757d;
+  --text-light: #adb5bd;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(44, 90, 160, 0.15);
+  --shadow-primary: rgba(44, 90, 160, 0.2);
+  --shadow-dark: rgba(0, 0, 0, 0.15);
 }
 
 @theme inline {
@@ -26,21 +27,22 @@
   --color-foreground: var(--foreground);
   --color-background-secondary: var(--background-secondary);
   --color-background-tertiary: var(--background-tertiary);
-  --color-accent-gold: var(--accent-gold);
-  --color-accent-gold-bright: var(--accent-gold-bright);
-  --color-accent-gold-dark: var(--accent-gold-dark);
-  --color-accent-burgundy: var(--accent-burgundy);
-  --color-accent-burgundy-dark: var(--accent-burgundy-dark);
-  --color-accent-silver: var(--accent-silver);
-  --color-accent-smoke: var(--accent-smoke);
-  --color-accent-steel: var(--accent-steel);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-primary-light: var(--accent-primary-light);
+  --color-accent-primary-dark: var(--accent-primary-dark);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-secondary-dark: var(--accent-secondary-dark);
+  --color-accent-success: var(--accent-success);
+  --color-accent-text: var(--accent-text);
+  --color-accent-text-light: var(--accent-text-light);
+  --color-accent-border: var(--accent-border);
   --color-text-muted: var(--text-muted);
-  --color-text-smoke: var(--text-smoke);
+  --color-text-light: var(--text-light);
   --color-glass-bg: var(--glass-bg);
   --color-glass-border: var(--glass-border);
-  --color-shadow-gold: var(--shadow-gold);
+  --color-shadow-primary: var(--shadow-primary);
   --color-shadow-dark: var(--shadow-dark);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: "Montserrat Alternates", var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
   --font-cormorant: var(--font-cormorant);
@@ -49,11 +51,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: "Montserrat Alternates", var(--font-sans), system-ui, sans-serif;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(114, 47, 55, 0.03) 0%, transparent 40%),
-    linear-gradient(135deg, rgba(54, 69, 79, 0.02) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(44, 90, 160, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0, 180, 216, 0.02) 0%, transparent 40%),
+    linear-gradient(135deg, rgba(248, 249, 250, 0.5) 0%, transparent 50%);
 }
 
 .lux-heading {
@@ -127,15 +129,15 @@ body {
   right: -2px;
   bottom: -2px;
   background: linear-gradient(45deg, 
-    var(--accent-gold), 
-    var(--accent-burgundy), 
-    var(--accent-smoke), 
-    var(--accent-gold));
+    var(--accent-primary), 
+    var(--accent-secondary), 
+    var(--accent-primary-light), 
+    var(--accent-primary));
   background-size: 200% 200%;
   border-radius: inherit;
   z-index: -1;
   animation: golden-border 3s ease-in-out infinite;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 @keyframes golden-border {
@@ -145,16 +147,16 @@ body {
 
 .luxury-card {
   background: linear-gradient(135deg, 
-    rgba(255, 215, 0, 0.05) 0%, 
-    rgba(18, 18, 18, 0.9) 25%, 
-    rgba(30, 30, 30, 0.95) 75%, 
-    rgba(255, 215, 0, 0.03) 100%);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 215, 0, 0.2);
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(248, 249, 250, 0.9) 25%, 
+    rgba(233, 236, 239, 0.85) 75%, 
+    rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(44, 90, 160, 0.15);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.7),
-    0 16px 64px rgba(255, 215, 0, 0.1),
-    inset 0 1px 0 rgba(255, 215, 0, 0.15);
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(44, 90, 160, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .smoke-text {
@@ -163,11 +165,34 @@ body {
 }
 
 .golden-accent {
-  color: var(--accent-gold);
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  color: var(--accent-primary);
+  text-shadow: 0 0 10px rgba(44, 90, 160, 0.3);
 }
 
 .steel-accent {
   color: var(--accent-steel);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Booking section specific styles */
+.booking-form-input {
+  transition: all 0.3s ease;
+}
+
+.booking-form-input:focus {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 8px 25px rgba(44, 90, 160, 0.15),
+    0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.booking-service-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.booking-service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(44, 90, 160, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1);
 }
