@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { testEmailConfiguration } from '@/lib/email-service';
+import { toZonedTime, fromZonedTime } from 'date-fns-tz';
 
 export async function GET() {
   try {
@@ -18,6 +19,19 @@ export async function GET() {
     ];
 
     const missingVars = requiredVars.filter(varName => !process.env[varName]);
+
+    // Test timezone handling
+    const now = new Date();
+    const algeriaTime = toZonedTime(now, 'Africa/Algiers');
+    const backToUtc = fromZonedTime(algeriaTime, 'Africa/Algiers');
+    
+    const timezoneTest = {
+      serverTime: now.toISOString(),
+      serverTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      algeriaTime: algeriaTime.toISOString(),
+      convertedBackToUtc: backToUtc.toISOString(),
+      timezoneWorking: Math.abs(now.getTime() - backToUtc.getTime()) < 1000, // Within 1 second
+    };
 
     const configStatus = {
       calendar: {
@@ -55,6 +69,7 @@ export async function GET() {
         ? 'All services are configured and ready' 
         : 'Some services need configuration',
       services: configStatus,
+      timezone: timezoneTest,
       totalMissing: missingVars.length,
       missingVariables: missingVars,
     });

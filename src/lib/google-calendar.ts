@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import { addHours, startOfDay, endOfDay } from 'date-fns';
+import { toZonedTime, fromZonedTime } from 'date-fns-tz';
 
 // Types for appointment data
 export interface AppointmentData {
@@ -17,6 +18,9 @@ export interface TimeSlot {
   end: string;
   available: boolean;
 }
+
+// Algeria timezone constant
+const ALGERIA_TIMEZONE = 'Africa/Algiers';
 
 // Initialize Google Calendar client
 function getCalendarClient() {
@@ -58,29 +62,37 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
       slotDuration: 1, // 1 hour slots
     };
 
-    // Get existing events for the day
-    const startTime = startOfDay(new Date(date));
-    const endTime = endOfDay(new Date(date));
+    // Parse the date in Algeria timezone
+    const selectedDate = new Date(date + 'T00:00:00');
+    
+    // Get start and end of day in Algeria timezone, then convert to UTC
+    const algeriaStartOfDay = startOfDay(selectedDate);
+    const algeriaEndOfDay = endOfDay(selectedDate);
+    
+    const utcStartTime = fromZonedTime(algeriaStartOfDay, ALGERIA_TIMEZONE);
+    const utcEndTime = fromZonedTime(algeriaEndOfDay, ALGERIA_TIMEZONE);
 
     const response = await calendar.events.list({
       calendarId,
-      timeMin: startTime.toISOString(),
-      timeMax: endTime.toISOString(),
+      timeMin: utcStartTime.toISOString(),
+      timeMax: utcEndTime.toISOString(),
       singleEvents: true,
       orderBy: 'startTime',
     });
 
     const existingEvents = response.data.items || [];
     
-    // Generate time slots for the day
+    // Generate time slots for the day in Algeria timezone
     const timeSlots: TimeSlot[] = [];
     
     for (let hour = businessHours.start; hour < businessHours.end; hour += businessHours.slotDuration) {
-      const slotStart = new Date(date);
-      slotStart.setHours(hour, 0, 0, 0);
+      // Create slot times in Algeria timezone
+      const algeriaSlotStart = new Date(date + `T${hour.toString().padStart(2, '0')}:00:00`);
+      const algeriaSlotEnd = new Date(date + `T${(hour + businessHours.slotDuration).toString().padStart(2, '0')}:00:00`);
       
-      const slotEnd = new Date(date);
-      slotEnd.setHours(hour + businessHours.slotDuration, 0, 0, 0);
+      // Convert to UTC for comparison with Google Calendar events
+      const utcSlotStart = fromZonedTime(algeriaSlotStart, ALGERIA_TIMEZONE);
+      const utcSlotEnd = fromZonedTime(algeriaSlotEnd, ALGERIA_TIMEZONE);
       
       // Check if this slot conflicts with existing events
       const isAvailable = !existingEvents.some(event => {
@@ -90,15 +102,15 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
         const eventEnd = new Date(event.end.dateTime);
         
         return (
-          (slotStart >= eventStart && slotStart < eventEnd) ||
-          (slotEnd > eventStart && slotEnd <= eventEnd) ||
-          (slotStart <= eventStart && slotEnd >= eventEnd)
+          (utcSlotStart >= eventStart && utcSlotStart < eventEnd) ||
+          (utcSlotEnd > eventStart && utcSlotEnd <= eventEnd) ||
+          (utcSlotStart <= eventStart && utcSlotEnd >= eventEnd)
         );
       });
       
       timeSlots.push({
-        start: slotStart.toISOString(),
-        end: slotEnd.toISOString(),
+        start: utcSlotStart.toISOString(),
+        end: utcSlotEnd.toISOString(),
         available: isAvailable,
       });
     }
@@ -120,9 +132,13 @@ export async function createAppointment(appointmentData: AppointmentData): Promi
       throw new Error('Google Calendar ID not configured');
     }
 
-    // Parse the appointment date and time
-    const appointmentDateTime = new Date(`${appointmentData.date}T${appointmentData.time}`);
-    const appointmentEndTime = addHours(appointmentDateTime, 1); // Default 1-hour appointments
+    // Parse the appointment date and time in Algeria timezone
+    const algeriaAppointmentTime = new Date(`${appointmentData.date}T${appointmentData.time}:00`);
+    const algeriaEndTime = addHours(algeriaAppointmentTime, 1); // Default 1-hour appointments
+    
+    // Convert to UTC for Google Calendar
+    const appointmentDateTime = fromZonedTime(algeriaAppointmentTime, ALGERIA_TIMEZONE);
+    const appointmentEndTime = fromZonedTime(algeriaEndTime, ALGERIA_TIMEZONE);
 
     // Create the event
     const event = {
@@ -136,11 +152,11 @@ ${appointmentData.notes ? `Notes: ${appointmentData.notes}` : ''}
       `.trim(),
       start: {
         dateTime: appointmentDateTime.toISOString(),
-        timeZone: 'Africa/Algiers', // Algeria timezone
+        timeZone: ALGERIA_TIMEZONE,
       },
       end: {
         dateTime: appointmentEndTime.toISOString(),
-        timeZone: 'Africa/Algiers', // Algeria timezone
+        timeZone: ALGERIA_TIMEZONE,
       },
       // Remove attendees to avoid Domain-Wide Delegation requirement
       // attendees: [
@@ -202,16 +218,19 @@ export async function updateAppointment(
     }
     
     if (appointmentData.date && appointmentData.time) {
-      const appointmentDateTime = new Date(`${appointmentData.date}T${appointmentData.time}`);
-      const appointmentEndTime = addHours(appointmentDateTime, 1);
+      const algeriaAppointmentTime = new Date(`${appointmentData.date}T${appointmentData.time}:00`);
+      const algeriaEndTime = addHours(algeriaAppointmentTime, 1);
+      
+      const appointmentDateTime = fromZonedTime(algeriaAppointmentTime, ALGERIA_TIMEZONE);
+      const appointmentEndTime = fromZonedTime(algeriaEndTime, ALGERIA_TIMEZONE);
       
       updatedEvent.start = {
         dateTime: appointmentDateTime.toISOString(),
-        timeZone: 'Africa/Algiers',
+        timeZone: ALGERIA_TIMEZONE,
       };
       updatedEvent.end = {
         dateTime: appointmentEndTime.toISOString(),
-        timeZone: 'Africa/Algiers',
+        timeZone: ALGERIA_TIMEZONE,
       };
     }
 
