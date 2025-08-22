@@ -53,7 +53,7 @@ export default function Hero(): ReactElement {
                 <div className="absolute -inset-2 bg-gradient-to-r from-accent-primary/5 via-transparent to-accent-primary/5 blur-xl" />
               </span>
               <span className="block golden-accent text-4xl sm:text-6xl lg:text-7xl font-light italic mt-2">
-                Dentaire Tibaoui
+                Harmony
               </span>
             </motion.h1>
             

@@ -45,7 +45,6 @@
   --font-sans: "Montserrat Alternates", var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-playfair);
-  --font-cormorant: var(--font-cormorant);
 }
 
 body {
@@ -59,13 +58,13 @@ body {
 }
 
 .lux-heading {
-  font-family: var(--font-cormorant), var(--font-playfair), serif;
+  font-family: var(--font-playfair), serif;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .mafia-heading {
-  font-family: var(--font-cormorant), serif;
+  font-family: var(--font-playfair), serif;
   font-weight: 700;
   letter-spacing: -0.035em;
   text-shadow: 
@@ -184,6 +183,41 @@ body {
   box-shadow: 
     0 8px 25px rgba(44, 90, 160, 0.15),
     0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix form input text visibility */
+input, 
+select, 
+textarea {
+  color: var(--accent-text) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  color: var(--accent-text) !important;
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--accent-text-light) !important;
+  opacity: 0.7;
+}
+
+/* Ensure glass morphism forms have visible text */
+.glass-morphism input,
+.glass-morphism select,
+.glass-morphism textarea {
+  color: var(--accent-text) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.glass-morphism input:focus,
+.glass-morphism select:focus,
+.glass-morphism textarea:focus {
+  background-color: rgba(255, 255, 255, 1) !important;
 }
 
 .booking-service-card {

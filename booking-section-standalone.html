@@ -79,16 +79,71 @@
 
     .form-input {
       transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.98) !important;
       border: 1px solid rgba(44, 90, 160, 0.15);
+      color: #333333 !important;
+      font-size: 16px;
+      line-height: 1.5;
     }
 
     .form-input:focus {
       border-color: var(--accent-primary);
+      background: rgba(255, 255, 255, 1) !important;
+      color: #333333 !important;
       box-shadow: 
         0 0 0 3px rgba(44, 90, 160, 0.1),
         0 4px 12px rgba(44, 90, 160, 0.1);
       outline: none;
+    }
+
+    .form-input::placeholder {
+      color: #9ca3af;
+      opacity: 1;
+    }
+
+    .form-input:focus::placeholder {
+      color: #d1d5db;
+    }
+
+    /* Ensure all form elements have proper text visibility */
+    input.form-input,
+    select.form-input,
+    textarea.form-input {
+      background: rgba(255, 255, 255, 0.98) !important;
+      color: #333333 !important;
+      font-weight: 400;
+      -webkit-text-fill-color: #333333 !important;
+      caret-color: #333333;
+    }
+
+    input.form-input:focus,
+    select.form-input:focus,
+    textarea.form-input:focus {
+      background: rgba(255, 255, 255, 1) !important;
+      color: #333333 !important;
+      -webkit-text-fill-color: #333333 !important;
+    }
+
+    /* Override any Tailwind classes that might interfere */
+    .form-input {
+      background-color: rgba(255, 255, 255, 0.98) !important;
+      color: #333333 !important;
+    }
+
+    /* Specific styling for different input types */
+    input[type="text"].form-input,
+    input[type="email"].form-input,
+    input[type="tel"].form-input {
+      color: #333333 !important;
+      text-shadow: none !important;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /* Debug: Ensure visibility with high contrast */
+    .form-input:not(:placeholder-shown) {
+      color: #000000 !important;
+      font-weight: 500 !important;
     }
 
     .btn-primary {
@@ -147,7 +202,7 @@
         <div class="luxury-card p-6 sticky top-8">
           <h3 class="lux-heading text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
             <i class="fas fa-star text-blue-700"></i>
-            Nos Services
+            <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">Nos Services</span>
           </h3>
           
           <div class="space-y-3" id="servicesContainer">
@@ -171,7 +226,7 @@
             <div class="space-y-6">
               <h3 class="lux-heading text-xl font-bold text-gray-800 flex items-center gap-3">
                 <i class="fas fa-user text-blue-700"></i>
-                Informations Personnelles
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">Informations Personnelles</span>
               </h3>
               
               <div class="grid md:grid-cols-2 gap-6">
@@ -229,7 +284,7 @@
             <div class="space-y-6">
               <h3 class="lux-heading text-xl font-bold text-gray-800 flex items-center gap-3">
                 <i class="fas fa-calendar text-blue-700"></i>
-                Date & Heure
+                <span class="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">Date & Heure</span>
               </h3>
               
               <div class="grid md:grid-cols-2 gap-6">

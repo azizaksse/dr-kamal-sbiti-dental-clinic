@@ -54,7 +54,7 @@ const orthodontieTreatments = [
   {
     title: "Pitts 21",
     description: "Le système Pitts 21 est une technique orthodontique avancée à faible friction, qui permet un meilleur contrôle du mouvement des dents et un traitement plus rapide, avec des résultats esthétiques optimisés.",
-    image: "/tibaoui-pitts21.png"
+    image: "/harmony-pitts21.png"
   },
   {
     title: "Céramique",

@@ -1,39 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Playfair_Display, Cormorant_Garamond } from "next/font/google";
+// import { JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
 import { siteConfig } from "@/config/site";
 
-const interSans = Inter({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  fallback: ["system-ui", "arial"],
-  display: "swap",
-});
 
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  fallback: ["ui-monospace", "Menlo", "Monaco", "Consolas", "monospace"],
-  display: "swap",
-});
+// const jetBrainsMono = JetBrains_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+//   fallback: ["ui-monospace", "Menlo", "Monaco", "Consolas", "monospace"],
+//   display: "swap",
+// });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  fallback: ["Georgia", "Times New Roman", "serif"],
-  display: "swap",
-});
+// const playfair = Playfair_Display({
+//   variable: "--font-playfair",
+//   subsets: ["latin"],
+//   fallback: ["Georgia", "Times New Roman", "serif"],
+//   display: "swap",
+// });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  fallback: ["Georgia", "Times New Roman", "serif"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -75,7 +62,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${interSans.variable} ${jetBrainsMono.variable} ${playfair.variable} ${cormorant.variable} antialiased pt-20`}>
+      <body className="antialiased pt-20">
         <Navbar />
         <main>{children}</main>
         <Footer />

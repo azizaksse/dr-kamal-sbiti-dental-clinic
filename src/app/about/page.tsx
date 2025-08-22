@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "À propos - Clinique Dentaire Tibaoui",
+  title: "À propos - Harmony Clinic",
 };
 
 import Container from "@/components/Container";
@@ -62,7 +62,7 @@ export default function AboutPage(): ReactElement {
             <Reveal delay={200}>
               <h1 className="mafia-heading text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.9] mb-8">
                 <span className="block">CLINIQUE</span>
-                <span className="block text-accent-primary">TIBAOUI</span>
+                <span className="block text-accent-primary">HARMONY</span>
               </h1>
             </Reveal>
             
@@ -120,7 +120,7 @@ export default function AboutPage(): ReactElement {
                 
                 <div className="space-y-6 text-lg text-white/85 leading-relaxed">
                   <p>
-                    Au cœur d&apos;Alger, la Clinique Tibaoui s&apos;est imposée comme une référence 
+                    Au cœur d&apos;Alger, Harmony Clinic s&apos;est imposée comme une référence 
                     en soins dentaires d&apos;excellence depuis 2016.
                   </p>
                   <p>

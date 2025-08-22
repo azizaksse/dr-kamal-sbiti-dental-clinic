@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { addHours, startOfDay, endOfDay } from 'date-fns';
-import { toZonedTime, fromZonedTime } from 'date-fns-tz';
+import { fromZonedTime } from 'date-fns-tz';
 
 // Types for appointment data
 export interface AppointmentData {

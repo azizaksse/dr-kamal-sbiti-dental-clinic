@@ -38,7 +38,7 @@ export default function Footer(): ReactElement {
               <div className="flex items-center gap-3 mb-6">
                 <Crown className="w-8 h-8 text-accent-primary" />
                 <span className="mafia-heading text-2xl text-accent-primary">
-                  Clinique Tibaoui
+                  Harmony Clinic
                 </span>
               </div>
               <p className="text-accent-primary/80 leading-relaxed mb-6">
@@ -136,7 +136,7 @@ export default function Footer(): ReactElement {
           {/* Bottom Section */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-6 text-accent-primary/60 text-sm">
-              <p>© {new Date().getFullYear()} Clinique Tibaoui</p>
+              <p>© {new Date().getFullYear()} Harmony Clinic</p>
               <span className="hidden sm:block">•</span>
               <p>Tous droits réservés</p>
               <span className="hidden sm:block">•</span>

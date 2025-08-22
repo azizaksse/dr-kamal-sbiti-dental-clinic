@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Clinique Dentaire Tibaoui",
-  baseUrl: "https://www.clinique-tibaoui.dz",
+  name: "Harmony Clinic",
+  baseUrl: "https://www.harmony-clinic.dz",
   phone: "+213 21 XX XX XX",
-  email: "contact@clinique-tibaoui.dz",
+  email: "contact@harmony-clinic.dz",
   address: "Avenue Pasteur, Hydra, Alger",
   bookingUrl: "/book",
   services: [

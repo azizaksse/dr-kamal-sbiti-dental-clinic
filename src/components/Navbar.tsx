@@ -24,7 +24,7 @@ export default function Navbar(): ReactElement {
           <Link href="/" className="group flex items-center gap-3">
             <Crown className="w-7 h-7 text-accent-primary group-hover:rotate-12 transition-transform duration-300" />
             <span className="mafia-heading text-2xl text-accent-primary tracking-wide group-hover:text-accent-primary-light transition-colors duration-300">
-              Clinique Tibaoui
+              Harmony Clinic
             </span>
           </Link>
         </div>
