@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "À propos - Harmony Clinic",
+  title: "À propos - DR. KAMAL SBITI",
 };
 
 import Container from "@/components/Container";
@@ -62,13 +62,13 @@ export default function AboutPage(): ReactElement {
             <Reveal delay={200}>
               <h1 className="mafia-heading text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.9] mb-8">
                 <span className="block">CLINIQUE</span>
-                <span className="block text-accent-primary">HARMONY</span>
+                <span className="block text-accent-primary">DR. KAMAL SBITI</span>
               </h1>
             </Reveal>
             
             <Reveal delay={400}>
               <p className="text-2xl sm:text-3xl text-white/90 max-w-3xl leading-relaxed font-light">
-                Depuis 2016, nous redéfinissons les soins dentaires à Alger. 
+                Depuis 2016, nous redéfinissons les soins dentaires à Annaba. 
                 <span className="text-accent-primary-light font-medium"> Une expertise reconnue au service de votre sourire.</span>
               </p>
             </Reveal>
@@ -120,7 +120,7 @@ export default function AboutPage(): ReactElement {
                 
                 <div className="space-y-6 text-lg text-white/85 leading-relaxed">
                   <p>
-                    Au cœur d&apos;Alger, Harmony Clinic s&apos;est imposée comme une référence 
+                    Au cœur d&apos;Annaba, DR. KAMAL SBITI s&apos;est imposé comme une référence 
                     en soins dentaires d&apos;excellence depuis 2016.
                   </p>
                   <p>

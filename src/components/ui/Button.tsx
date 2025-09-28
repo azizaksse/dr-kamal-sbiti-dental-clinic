@@ -6,19 +6,21 @@ import { clsx } from "clsx";
 import { Slot } from "@radix-ui/react-slot";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none uppercase tracking-wide",
   {
     variants: {
       variant: {
-        primary: "bg-accent-primary text-white hover:bg-accent-primary-dark focus-visible:ring-accent-primary",
-        outline: "bg-transparent ring-1 ring-accent-primary/30 text-accent-text hover:bg-accent-primary/10 hover:ring-accent-primary/50",
-        ghost: "bg-transparent text-accent-text hover:bg-accent-primary/10",
-        gold: "bg-gradient-to-r from-accent-primary to-accent-secondary text-white font-semibold hover:from-accent-primary-dark hover:to-accent-secondary-dark hover:scale-105 focus-visible:ring-accent-primary shadow-lg hover:shadow-xl",
+        primary: "cta-primary focus-visible:ring-accent-gold",
+        secondary: "cta-secondary focus-visible:ring-accent-golden-grey",
+        outline: "bg-transparent ring-1 ring-accent-golden-grey/30 text-accent-text hover:bg-accent-golden-grey/10 hover:ring-accent-golden-grey/50",
+        ghost: "bg-transparent text-accent-text hover:bg-accent-golden-grey/10",
+        gold: "cta-golden focus-visible:ring-accent-gold",
+        premium: "cta-premium focus-visible:ring-accent-gold",
       },
       size: {
-        sm: "h-9 px-4 text-xs",
-        md: "h-11 px-6 text-sm",
-        lg: "h-14 px-8 text-base",
+        sm: "h-9 px-4 text-xs cta-small",
+        md: "h-11 px-6 text-sm cta-medium",
+        lg: "h-14 px-8 text-base cta-large",
       },
     },
     defaultVariants: {

@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "Harmony Clinic",
-  baseUrl: "https://www.harmony-clinic.dz",
+  name: "DR. KAMAL SBITI",
+  baseUrl: "https://www.dr-kamal-sbiti.dz",
   phone: "+213 21 XX XX XX",
-  email: "contact@harmony-clinic.dz",
-  address: "Avenue Pasteur, Hydra, Alger",
+  email: "contact@dr-kamal-sbiti.dz",
+  address: "Avenue Pasteur, Hydra, Annaba",
   bookingUrl: "/book",
   services: [
     "Consultation",

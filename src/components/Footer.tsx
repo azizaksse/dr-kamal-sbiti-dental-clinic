@@ -38,11 +38,11 @@ export default function Footer(): ReactElement {
               <div className="flex items-center gap-3 mb-6">
                 <Crown className="w-8 h-8 text-accent-primary" />
                 <span className="mafia-heading text-2xl text-accent-primary">
-                  Harmony Clinic
+                  DR. KAMAL SBITI
                 </span>
               </div>
               <p className="text-accent-primary/80 leading-relaxed mb-6">
-                Orthodontie, soins dentaires et esthétique du sourire à Alger.
+                Orthodontie, soins dentaires et esthétique du sourire à Annaba.
                 Expertise reconnue depuis 2016.
               </p>
               <div className="space-y-3">
@@ -56,7 +56,7 @@ export default function Footer(): ReactElement {
                 </div>
                 <div className="flex items-center gap-3 text-accent-primary/70 text-sm">
                   <MapPin className="w-4 h-4 text-accent-primary" />
-                  <span>Alger, Algérie</span>
+                  <span>Annaba, Algérie</span>
                 </div>
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Footer(): ReactElement {
           {/* Bottom Section */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-6 text-accent-primary/60 text-sm">
-              <p>© {new Date().getFullYear()} Harmony Clinic</p>
+              <p>© {new Date().getFullYear()} DR. KAMAL SBITI</p>
               <span className="hidden sm:block">•</span>
               <p>Tous droits réservés</p>
               <span className="hidden sm:block">•</span>

@@ -62,8 +62,7 @@ function getCalendarClient() {
 // Check calendar availability for a specific date
 export async function checkAvailability(date: string): Promise<TimeSlot[]> {
   try {
-    console.log('Checking availability for date:', date);
-    
+    // Reduced logging for performance
     const calendar = getCalendarClient();
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
     
@@ -78,9 +77,6 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
       slotDuration: 1, // 1 hour slots
     };
 
-    // Parse the date more safely
-    console.log('Original date string:', date);
-    
     // Validate date format
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
       throw new Error(`Invalid date format: ${date}. Expected YYYY-MM-DD`);
@@ -90,20 +86,12 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
     const [year, month, day] = date.split('-').map(Number);
     const selectedDate = new Date(year, month - 1, day); // month is 0-indexed
     
-    console.log('Parsed selectedDate:', selectedDate);
-    
     // Get start and end of day in Algeria timezone, then convert to UTC
     const algeriaStartOfDay = startOfDay(selectedDate);
     const algeriaEndOfDay = endOfDay(selectedDate);
     
-    console.log('Algeria start/end of day:', { algeriaStartOfDay, algeriaEndOfDay });
-    
     const utcStartTime = fromZonedTime(algeriaStartOfDay, ALGERIA_TIMEZONE);
     const utcEndTime = fromZonedTime(algeriaEndOfDay, ALGERIA_TIMEZONE);
-    
-    console.log('UTC start/end times:', { utcStartTime, utcEndTime });
-
-    console.log('Making Google Calendar API call...');
     const response = await calendar.events.list({
       calendarId,
       timeMin: utcStartTime.toISOString(),
@@ -112,9 +100,7 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
       orderBy: 'startTime',
     });
 
-    console.log('Google Calendar API response received');
     const existingEvents = response.data.items || [];
-    console.log('Existing events count:', existingEvents.length);
     
     // Generate time slots for the day in Algeria timezone
     const timeSlots: TimeSlot[] = [];
@@ -125,13 +111,9 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
         const algeriaSlotStart = new Date(year, month - 1, day, hour, 0, 0, 0);
         const algeriaSlotEnd = new Date(year, month - 1, day, hour + businessHours.slotDuration, 0, 0, 0);
         
-        console.log(`Creating slot for hour ${hour}:`, { algeriaSlotStart, algeriaSlotEnd });
-        
         // Convert to UTC for comparison with Google Calendar events
         const utcSlotStart = fromZonedTime(algeriaSlotStart, ALGERIA_TIMEZONE);
         const utcSlotEnd = fromZonedTime(algeriaSlotEnd, ALGERIA_TIMEZONE);
-        
-        console.log(`UTC slot times for hour ${hour}:`, { utcSlotStart, utcSlotEnd });
       
         // Check if this slot conflicts with existing events
         const isAvailable = !existingEvents.some(event => {
@@ -153,8 +135,6 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
           available: isAvailable,
         });
         
-        console.log(`Slot ${hour}:00 - available: ${isAvailable}`);
-        
       } catch (slotError) {
         console.error(`Error creating slot for hour ${hour}:`, slotError);
         // Continue with next slot instead of failing completely
@@ -162,7 +142,6 @@ export async function checkAvailability(date: string): Promise<TimeSlot[]> {
       }
     }
     
-    console.log('Total slots generated:', timeSlots.length);
     return timeSlots;
     
   } catch (error) {

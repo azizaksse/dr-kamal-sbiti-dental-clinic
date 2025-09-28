@@ -53,7 +53,7 @@ export default function Hero(): ReactElement {
                 <div className="absolute -inset-2 bg-gradient-to-r from-accent-primary/5 via-transparent to-accent-primary/5 blur-xl" />
               </span>
               <span className="block golden-accent text-4xl sm:text-6xl lg:text-7xl font-light italic mt-2">
-                Harmony
+                DR. KAMAL SBITI
               </span>
             </motion.h1>
             
@@ -63,7 +63,7 @@ export default function Hero(): ReactElement {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.7 }}
             >
-              Orthodontie, soins dentaires et esthétique du sourire à Alger. 
+              Orthodontie, soins dentaires et esthétique du sourire à Annaba. 
               <br className="hidden sm:block" />
               <span className="golden-accent font-medium">Expertise reconnue. Technologies modernes. Résultats exceptionnels.</span>
             </motion.p>

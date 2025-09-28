@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     default: `${siteConfig.name} — Clinique Dentaire`,
     template: `%s — ${siteConfig.name}`,
   },
-  description: "Clinique dentaire moderne à Alger. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
+  description: "Clinique dentaire moderne à Annaba. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
   metadataBase: new URL(siteConfig.baseUrl),
   alternates: { canonical: "/" },
   openGraph: {
     title: `${siteConfig.name} — Clinique Dentaire`,
     description:
-      "Clinique dentaire moderne à Alger. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
+      "Clinique dentaire moderne à Annaba. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
     url: "/",
     siteName: siteConfig.name,
     type: "website",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${siteConfig.name} — Clinique Dentaire`,
     description:
-      "Clinique dentaire moderne à Alger. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
+      "Clinique dentaire moderne à Annaba. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
   },
 };
 

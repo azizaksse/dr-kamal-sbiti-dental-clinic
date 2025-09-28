@@ -41,7 +41,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(timeSlots, { 
       status: 200,
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=60',
+        'CDN-Cache-Control': 'max-age=300',
       }
     });
 

@@ -202,7 +202,7 @@ export default function Home(): ReactElement {
                 Tarifs <span className="golden-accent">Transparents</span>
               </h2>
               <p className="text-xl text-accent-text-light max-w-3xl mx-auto">
-                Des prix clairs pour des soins dentaires d&apos;exception à Alger
+                Des prix clairs pour des soins dentaires d&apos;exception à Annaba
               </p>
             </div>
           </Reveal>
