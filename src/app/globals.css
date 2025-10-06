@@ -453,6 +453,16 @@ a:hover {
   filter: drop-shadow(0 2px 4px rgba(218, 165, 32, 0.3));
 }
 
+/* One Smile Lab Logo Styles */
+.one-smile-logo {
+  filter: drop-shadow(0 4px 8px rgba(44, 62, 80, 0.15));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.one-smile-logo:hover {
+  filter: drop-shadow(0 6px 12px rgba(218, 165, 32, 0.3));
+}
+
 .header-brand .brand-text {
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-golden-grey) 100%);
   -webkit-background-clip: text;

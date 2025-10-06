@@ -15,8 +15,8 @@ const services: Service[] = [
   {
     title: "ORTHODONTIE MODERNE",
     subtitle: "Alignement Parfait de Votre Sourire",
-    description: "Correction de l&apos;alignement dentaire avec les techniques les plus avancées: aligneurs invisibles, système céramique et Pitts 21 pour des résultats esthétiques optimaux.",
-    features: ["Aligneurs invisibles Invisalign", "Brackets céramiques transparents", "Système Pitts 21 à faible friction", "Suivi numérique 3D"],
+    description: "Correction de l&apos;alignement dentaire avec les techniques les plus avancées: aligneurs invisibles, soins dentaires et prothèses fixes pour des résultats esthétiques optimaux.",
+    features: ["Aligneurs invisibles Invisalign"],
     premium: true,
     price: "À partir de 120,000 DA",
   },
@@ -24,7 +24,7 @@ const services: Service[] = [
     title: "IMPLANTOLOGIE",
     subtitle: "Remplacement Dentaire Permanent",
     description: "Solutions d&apos;implants dentaires de dernière génération pour remplacer vos dents manquantes avec des matériaux biocompatibles et une chirurgie guidée par ordinateur.",
-    features: ["Implants en titanium Grade 4", "Chirurgie guidée 3D", "Prothèses sur mesure", "Cicatrisation rapide"],
+    features: ["Chirurgie radical", "Prothèses sur mesure", "Prothèse dentaire provisoire"],
     premium: true,
     price: "80,000 DA par implant",
   },
@@ -32,12 +32,12 @@ const services: Service[] = [
     title: "ESTHÉTIQUE DENTAIRE",
     subtitle: "Sourire de Rêve Garanti",
     description: "Transformez votre sourire avec nos traitements esthétiques: facettes céramiques, blanchiment laser professionnel et design du sourire personnalisé.",
-    features: ["Facettes céramiques E-max", "Blanchiment laser Zoom", "Design du sourire numérique", "Résultats immédiats"],
+    features: ["Facettes céramiques E-max", "Design du sourire numérique", "Résultats immédiats"],
     premium: true,
     price: "Sur devis",
   },
   {
-    title: "SOINS GÉNÉRAUX",
+    title: "SOINS MODERNES",
     subtitle: "Prévention et Traitement",
     description: "Soins dentaires complets pour toute la famille: détartrage, soins des caries, traitements de canal et prévention bucco-dentaire.",
     features: ["Détartrage ultrasonique", "Soins conservateurs", "Endodontie moderne", "Prévention personnalisée"],
@@ -104,7 +104,7 @@ export default function ServicesPage(): ReactElement {
               const Icon = getServiceIcon(idx);
               return (
                 <Reveal key={service.title} delay={idx * 150}>
-                  <div className={`luxury-card rounded-2xl p-8 group hover:scale-105 transition-all duration-500 relative overflow-hidden ${service.premium ? 'mafia-glow' : ''}`}>
+                  <div className={`luxury-card rounded-2xl p-8 group hover:scale-105 transition-all duration-500 relative overflow-hidden h-full flex flex-col ${service.premium ? 'mafia-glow' : ''}`}>
                     {service.premium && (
                       <div className="absolute top-4 right-4">
                         <div className="luxury-card px-3 py-1 rounded-full">
@@ -133,7 +133,7 @@ export default function ServicesPage(): ReactElement {
                         {service.description}
                       </p>
                       
-                      <div className="space-y-3 mb-8">
+                      <div className="space-y-3 mb-8 flex-grow">
                         {service.features.map((feature) => (
                           <div key={feature} className="flex items-center gap-3">
                             <CheckCircle className="w-5 h-5 text-accent-gold flex-shrink-0" />
@@ -142,7 +142,7 @@ export default function ServicesPage(): ReactElement {
                         ))}
                       </div>
                       
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between mt-auto">
                         <div>
                           <span className="text-text-muted text-sm tracking-wide uppercase">Tarif</span>
                           <div className="mafia-heading text-2xl text-accent-gold">
@@ -200,7 +200,7 @@ export default function ServicesPage(): ReactElement {
               {
                 icon: Clock,
                 title: "PRISE EN CHARGE RAPIDE",
-                description: "Rendez-vous dans les meilleurs délais et urgences dentaires 24h/24."
+                description: "Rendez-vous dans les meilleurs délais."
               },
               {
                 icon: Crown,
@@ -209,14 +209,14 @@ export default function ServicesPage(): ReactElement {
               }
             ].map((guarantee, idx) => (
               <Reveal key={guarantee.title} delay={idx * 200}>
-                <div className="luxury-card text-center p-8 rounded-xl group hover:scale-105 transition-all duration-500">
+                <div className="luxury-card text-center p-8 rounded-xl group hover:scale-105 transition-all duration-500 h-full flex flex-col">
                   <div className="w-20 h-20 mx-auto mb-6 luxury-card rounded-full flex items-center justify-center group-hover:bg-accent-gold/20 transition-colors duration-300">
                     <guarantee.icon className="w-10 h-10 text-accent-gold" />
                   </div>
                   <h3 className="mafia-heading text-xl text-white mb-4 group-hover:text-accent-gold transition-colors duration-300">
                     {guarantee.title}
                   </h3>
-                  <p className="text-white/80 leading-relaxed">
+                  <p className="text-white/80 leading-relaxed flex-grow">
                     {guarantee.description}
                   </p>
                 </div>

@@ -24,16 +24,16 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: {
-    default: `${siteConfig.name} — Clinique Dentaire`,
+    default: `${siteConfig.name} — Laboratoire Dentaire`,
     template: `%s — ${siteConfig.name}`,
   },
-  description: "Clinique dentaire moderne à Annaba. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
+  description: "Laboratoire dentaire moderne en Algérie. Prothèses dentaires de qualité, couronnes, bridges, implants. Services de laboratoire dentaire professionnels.",
   metadataBase: new URL(siteConfig.baseUrl),
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${siteConfig.name} — Clinique Dentaire`,
+    title: `${siteConfig.name} — Laboratoire Dentaire`,
     description:
-      "Clinique dentaire moderne à Annaba. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
+      "Laboratoire dentaire moderne en Algérie. Prothèses dentaires de qualité, couronnes, bridges, implants. Services de laboratoire dentaire professionnels.",
     url: "/",
     siteName: siteConfig.name,
     type: "website",
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — Clinique Dentaire`,
+    title: `${siteConfig.name} — Laboratoire Dentaire`,
     description:
-      "Clinique dentaire moderne à Annaba. Soins dentaires de qualité, orthodontie, implants, esthétique dentaire. Prise de rendez-vous en ligne.",
+      "Laboratoire dentaire moderne en Algérie. Prothèses dentaires de qualité, couronnes, bridges, implants. Services de laboratoire dentaire professionnels.",
   },
 };
 

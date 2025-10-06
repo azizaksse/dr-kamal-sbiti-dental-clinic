@@ -17,7 +17,7 @@ const advantages = [
     premium: true 
   },
   { 
-    title: "SOINS COMPLETS", 
+    title: "PROTHÈSES COMPLÈTES", 
     desc: "Prise en charge dentaire complète: implants, esthétique et prévention.", 
     icon: CheckCircle,
     premium: false 
@@ -52,19 +52,19 @@ const orthodontieTreatments = [
     image: "/dentalog-222-1930.jpg"
   },
   {
-    title: "Pitts 21",
-    description: "Le système Pitts 21 est une technique orthodontique avancée à faible friction, qui permet un meilleur contrôle du mouvement des dents et un traitement plus rapide, avec des résultats esthétiques optimisés.",
+    title: "La Prothèse Fixe",
+    description: "Les prothèses fixes offrent une solution permanente et esthétique pour remplacer vos dents manquantes. Couronnes, bridges et implants dentaires conçus avec des matériaux de qualité supérieure pour un confort et une durabilité optimaux.",
     image: "/harmony-pitts21.png"
   },
   {
-    title: "Céramique",
-    description: "L'orthodontie céramique allie efficacité et esthétique grâce à des attaches transparentes qui se fondent avec la couleur naturelle des dents. Une solution discrète et performante pour corriger votre alignement dentaire.",
+    title: "Les Soins",
+    description: "Des soins dentaires complets et personnalisés pour maintenir votre santé bucco-dentaire. Détartrage, traitement des caries, soins préventifs et conseils personnalisés pour un sourire sain et éclatant.",
     image: "/dentalog-187-1930.jpg"
   }
 ];
 
 const stats = [
-  { number: "2016", label: "Année de Fondation", suffix: "" },
+  { number: "2025", label: "Année de Fondation", suffix: "" },
   { number: "3000", label: "Patients Satisfaits", suffix: "+" },
   { number: "30", label: "Pays de Conférences", suffix: "+" },
   { number: "98", label: "Taux de Réussite", suffix: "%" },
@@ -74,7 +74,7 @@ const services = [
   {
     title: "ORTHODONTIE",
     description: "Correction de l'alignement dentaire avec les techniques les plus modernes",
-    features: ["Aligneurs invisibles", "Système céramique", "Pitts 21"],
+    features: ["Aligneurs invisibles", "Soins dentaires", "Prothèse fixe"],
     href: "/services"
   },
   {
@@ -141,7 +141,7 @@ export default function Home(): ReactElement {
             <Reveal>
               <div>
                 <h2 className="mafia-heading text-5xl lg:text-6xl text-accent-text mb-8">
-                  Soins 
+                  Prothèses 
                   <span className="golden-accent block">Dentaires</span>
                 </h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-accent-primary to-accent-secondary rounded-full mb-8" />
@@ -157,7 +157,7 @@ export default function Home(): ReactElement {
                 >
                   <Link href="/services" className="flex items-center gap-3">
                     <Crown className="w-5 h-5" />
-                    DÉCOUVRIR NOS SOINS
+                    DÉCOUVRIR NOS PROTHÈSES
                   </Link>
                 </Button>
               </div>
@@ -202,7 +202,7 @@ export default function Home(): ReactElement {
                 Tarifs <span className="golden-accent">Transparents</span>
               </h2>
               <p className="text-xl text-accent-text-light max-w-3xl mx-auto">
-                Des prix clairs pour des soins dentaires d&apos;exception à Annaba
+                Des prix clairs pour des prothèses dentaires d&apos;exception en Algérie
               </p>
             </div>
           </Reveal>
@@ -289,7 +289,7 @@ export default function Home(): ReactElement {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {orthodontieTreatments.map((treatment, idx) => (
               <Reveal key={treatment.title} delay={idx * 200}>
-                <div className="luxury-card p-8 rounded-xl group hover:scale-105 transition-all duration-500">
+                <div className="luxury-card p-8 rounded-xl group hover:scale-105 transition-all duration-500 h-full flex flex-col">
                   <div className="mb-6 overflow-hidden rounded-lg">
                     <Image 
                       src={treatment.image} 
@@ -302,7 +302,7 @@ export default function Home(): ReactElement {
                   <h3 className="mafia-heading text-2xl text-accent-text mb-4 group-hover:text-accent-primary transition-colors duration-300">
                     {treatment.title}
                   </h3>
-                  <p className="text-accent-text-light leading-relaxed">
+                  <p className="text-accent-text-light leading-relaxed flex-grow">
                     {treatment.description}
                   </p>
                 </div>

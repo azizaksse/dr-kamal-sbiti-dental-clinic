@@ -9,7 +9,7 @@ import { Crown, Shield, Star, Clock, Users } from "lucide-react";
 import type { ReactElement } from "react";
 
 const stats = [
-  { number: "2016", label: "Année de Fondation", icon: Crown },
+  { number: "2025", label: "Année de Fondation", icon: Crown },
   { number: "3000+", label: "Patients Satisfaits", icon: Users },
   { number: "98%", label: "Taux de Réussite", icon: Star },
   { number: "25+", label: "Pays de Formation", icon: Clock },
@@ -68,7 +68,7 @@ export default function AboutPage(): ReactElement {
             
             <Reveal delay={400}>
               <p className="text-2xl sm:text-3xl text-white/90 max-w-3xl leading-relaxed font-light">
-                Depuis 2016, nous redéfinissons les soins dentaires à Annaba. 
+                Depuis 2025, nous redéfinissons les prothèses dentaires en Algérie. 
                 <span className="text-accent-primary-light font-medium"> Une expertise reconnue au service de votre sourire.</span>
               </p>
             </Reveal>
@@ -121,7 +121,7 @@ export default function AboutPage(): ReactElement {
                 <div className="space-y-6 text-lg text-white/85 leading-relaxed">
                   <p>
                     Au cœur d&apos;Annaba, DR. KAMAL SBITI s&apos;est imposé comme une référence 
-                    en soins dentaires d&apos;excellence depuis 2016.
+                    en prothèses dentaires d&apos;excellence depuis 2025.
                   </p>
                   <p>
                     Nous ne sommes pas simplement une clinique dentaire. Nous sommes les 

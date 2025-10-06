@@ -23,3 +23,4 @@ export default function ToothIcon({ className = "w-6 h-6" }: { className?: strin
     </svg>
   );
 }
+

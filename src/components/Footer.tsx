@@ -36,14 +36,23 @@ export default function Footer(): ReactElement {
             {/* Brand Section */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <Crown className="w-8 h-8 text-accent-primary" />
-                <span className="mafia-heading text-2xl text-accent-primary">
-                  DR. KAMAL SBITI
-                </span>
+                <img
+                  src="/logo.jpg"
+                  alt="One Smile Lab Logo"
+                  className="w-12 h-12 rounded-full object-cover shadow-lg"
+                />
+                <div className="flex flex-col">
+                  <span className="mafia-heading text-2xl text-accent-primary">
+                    ONE SMILE
+                  </span>
+                  <span className="mafia-heading text-lg text-accent-golden-grey font-light">
+                    LAB
+                  </span>
+                </div>
               </div>
               <p className="text-accent-primary/80 leading-relaxed mb-6">
-                Orthodontie, soins dentaires et esthétique du sourire à Annaba.
-                Expertise reconnue depuis 2016.
+                Prothèses dentaires, couronnes et services de laboratoire en Algérie.
+                Expertise reconnue depuis 2025.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-accent-primary/70 text-sm">
@@ -56,7 +65,7 @@ export default function Footer(): ReactElement {
                 </div>
                 <div className="flex items-center gap-3 text-accent-primary/70 text-sm">
                   <MapPin className="w-4 h-4 text-accent-primary" />
-                  <span>Annaba, Algérie</span>
+                  <span>Algérie</span>
                 </div>
               </div>
             </div>
@@ -67,22 +76,25 @@ export default function Footer(): ReactElement {
                 Nos <span className="text-accent-primary-light">Services</span>
               </h3>
               <nav className="space-y-3">
-                {footerLinks.services.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className="block text-accent-primary/70 hover:text-accent-primary-light transition-colors duration-300 text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                <Link href="/services" className="block text-accent-primary/70 hover:text-accent-primary-light transition-colors duration-300 text-sm">
+                  Couronnes dentaires
+                </Link>
+                <Link href="/services" className="block text-accent-primary/70 hover:text-accent-primary-light transition-colors duration-300 text-sm">
+                  Bridges
+                </Link>
+                <Link href="/services" className="block text-accent-primary/70 hover:text-accent-primary-light transition-colors duration-300 text-sm">
+                  Prothèses partielles
+                </Link>
+                <Link href="/services" className="block text-accent-primary/70 hover:text-accent-primary-light transition-colors duration-300 text-sm">
+                  Prothèses complètes
+                </Link>
               </nav>
             </div>
 
             {/* Company Links */}
             <div>
               <h3 className="mafia-heading text-lg text-accent-primary mb-6">
-                <span className="text-accent-primary-light">Clinique</span>
+                <span className="text-accent-primary-light">Laboratoire</span>
               </h3>
               <nav className="space-y-3">
                 {footerLinks.company.map((link) => (
@@ -136,11 +148,11 @@ export default function Footer(): ReactElement {
           {/* Bottom Section */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="flex flex-col sm:flex-row items-center gap-6 text-accent-primary/60 text-sm">
-              <p>© {new Date().getFullYear()} DR. KAMAL SBITI</p>
+              <p>© {new Date().getFullYear()} ONE SMILE LAB</p>
               <span className="hidden sm:block">•</span>
               <p>Tous droits réservés</p>
               <span className="hidden sm:block">•</span>
-              <p className="text-accent-primary-light">Excellence depuis 2016</p>
+              <p className="text-accent-primary-light">Excellence depuis 2025</p>
             </div>
             
             <div className="flex items-center gap-4">

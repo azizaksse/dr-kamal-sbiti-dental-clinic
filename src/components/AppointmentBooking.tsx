@@ -238,7 +238,7 @@ export default function AppointmentBooking({ className }: AppointmentBookingProp
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/40" />
                 <Input
                   {...register("patientPhone")}
-                  placeholder="(123) 456-7890"
+                  placeholder="+213 559124673"
                   className={`pl-10 ${errors.patientPhone ? "border-red-500" : ""}`}
                 />
               </div>
