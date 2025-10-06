@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactElement } from "react";
 import { siteConfig } from "@/config/site";
-import { Crown, Phone, Mail, MapPin, Shield, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Shield, Clock } from "lucide-react";
 import Container from "./Container";
 
 const footerLinks = {

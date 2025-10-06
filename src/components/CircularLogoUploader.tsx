@@ -67,13 +67,13 @@ export default function CircularLogoUploader({
       setUploadedImage(imageUrl);
       setUploadStatus("success");
       onImageUpload?.(imageUrl, file);
-    } catch (error) {
+    } catch {
       setErrorMessage("Erreur lors du traitement de l'image");
       setUploadStatus("error");
     } finally {
       setIsUploading(false);
     }
-  }, [maxFileSize, onImageUpload]);
+  }, [maxFileSize, onImageUpload, validateFile]);
 
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
