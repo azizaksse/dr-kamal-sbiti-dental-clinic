@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, type ReactElement } from "react";
+import Image from "next/image";
 import { Upload, X, Check } from "lucide-react";
 
 interface CircularLogoUploaderProps {
@@ -23,11 +24,10 @@ export default function CircularLogoUploader({
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Supported image formats
-  const supportedFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-  
   // Validate file
-  const validateFile = (file: File): string | null => {
+  const validateFile = useCallback((file: File): string | null => {
+    const supportedFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    
     if (!supportedFormats.includes(file.type)) {
       return "Format non supporté. Utilisez JPG, PNG ou WebP.";
     }
@@ -37,7 +37,7 @@ export default function CircularLogoUploader({
     }
     
     return null;
-  };
+  }, [maxFileSize]);
 
   // Convert file to base64 URL
   const convertToBase64 = (file: File): Promise<string> => {
@@ -73,7 +73,7 @@ export default function CircularLogoUploader({
     } finally {
       setIsUploading(false);
     }
-  }, [maxFileSize, onImageUpload, validateFile]);
+  }, [onImageUpload, validateFile]);
 
   // Handle input change
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,9 +125,11 @@ export default function CircularLogoUploader({
       <div className="logo-container">
         {uploadedImage ? (
           <div className="relative group">
-            <img
+            <Image
               src={uploadedImage}
               alt="Logo One Smile Lab"
+              width={120}
+              height={120}
               className="circular-logo-image"
               loading="lazy"
               onError={() => {

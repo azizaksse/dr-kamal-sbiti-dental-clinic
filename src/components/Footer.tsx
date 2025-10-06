@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { ReactElement } from "react";
 import { siteConfig } from "@/config/site";
 import { Phone, Mail, MapPin, Shield, Clock } from "lucide-react";
@@ -36,9 +37,11 @@ export default function Footer(): ReactElement {
             {/* Brand Section */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
-                <img
+                <Image
                   src="/logo.jpg"
                   alt="One Smile Lab Logo"
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-full object-cover shadow-lg"
                 />
                 <div className="flex flex-col">

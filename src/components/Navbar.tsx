@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, type ReactElement } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import CircularLogoUploader from "@/components/CircularLogoUploader";
@@ -33,9 +34,11 @@ export default function Navbar(): ReactElement {
           <Link href="/" className="group flex items-center gap-4">
             <div className="relative">
               {customLogo ? (
-                <img
+                <Image
                   src={customLogo}
                   alt="One Smile Lab Logo"
+                  width={48}
+                  height={48}
                   className="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-all duration-300 group-hover:rotate-3 cursor-pointer shadow-lg"
                   onClick={(e) => {
                     e.preventDefault();
