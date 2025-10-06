@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "À propos - DR. KAMAL SBITI",
+  title: "À propos - ONE SMILE LAB",
 };
 
 import Container from "@/components/Container";
@@ -61,16 +61,19 @@ export default function AboutPage(): ReactElement {
             
             <Reveal delay={200}>
               <h1 className="mafia-heading text-6xl sm:text-7xl lg:text-8xl text-white leading-[0.9] mb-8">
-                <span className="block">CLINIQUE</span>
-                <span className="block text-accent-primary">DR. KAMAL SBITI</span>
+                <span className="block">ONE SMILE</span>
+                <span className="block text-accent-primary">LAB</span>
               </h1>
             </Reveal>
             
             <Reveal delay={400}>
-              <p className="text-2xl sm:text-3xl text-white/90 max-w-3xl leading-relaxed font-light">
-                Depuis 2025, nous redéfinissons les prothèses dentaires en Algérie. 
-                <span className="text-accent-primary-light font-medium"> Une expertise reconnue au service de votre sourire.</span>
-              </p>
+              <div className="relative">
+                <div className="absolute inset-0 bg-black/30 backdrop-blur-sm rounded-lg"></div>
+                <p className="relative text-2xl sm:text-3xl text-white max-w-3xl leading-relaxed font-light p-6">
+                  Depuis 2025, nous redéfinissons les prothèses dentaires en Algérie. 
+                  <span className="text-accent-primary-light font-medium"> Une expertise reconnue au service de votre sourire.</span>
+                </p>
+              </div>
             </Reveal>
           </div>
         </Container>
@@ -120,11 +123,11 @@ export default function AboutPage(): ReactElement {
                 
                 <div className="space-y-6 text-lg text-white/85 leading-relaxed">
                   <p>
-                    Au cœur d&apos;Annaba, DR. KAMAL SBITI s&apos;est imposé comme une référence 
+                    Au cœur d&apos;Algérie, ONE SMILE LAB s&apos;est imposé comme une référence 
                     en prothèses dentaires d&apos;excellence depuis 2025.
                   </p>
                   <p>
-                    Nous ne sommes pas simplement une clinique dentaire. Nous sommes les 
+                    Nous ne sommes pas simplement un laboratoire dentaire. Nous sommes les 
                     artisans de votre sourire, les gardiens de votre santé bucco-dentaire, 
                     les partenaires de confiance de votre bien-être.
                   </p>

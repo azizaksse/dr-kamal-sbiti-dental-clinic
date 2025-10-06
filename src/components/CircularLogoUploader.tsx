@@ -24,10 +24,11 @@ export default function CircularLogoUploader({
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Supported image formats
+  const supportedFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
   // Validate file
   const validateFile = useCallback((file: File): string | null => {
-    const supportedFormats = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-    
     if (!supportedFormats.includes(file.type)) {
       return "Format non supporté. Utilisez JPG, PNG ou WebP.";
     }
@@ -37,7 +38,7 @@ export default function CircularLogoUploader({
     }
     
     return null;
-  }, [maxFileSize]);
+  }, [maxFileSize, supportedFormats]);
 
   // Convert file to base64 URL
   const convertToBase64 = (file: File): Promise<string> => {
